@@ -1,0 +1,783 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>AI for HR — India's First AI Course Built for HR Professionals</title>
+<meta name="description" content="Learn how to use ChatGPT, Claude and AI tools in your daily HR work. India's first practical AI course for HR professionals. Launching soon.">
+<link href="https://fonts.googleapis.com/css2?family=Clash+Display:wght@400;500;600;700&family=Bricolage+Grotesque:wght@300;400;500;600&family=JetBrains+Mono:wght@400;500&display=swap" rel="stylesheet">
+<style>
+*, *::before, *::after { margin: 0; padding: 0; box-sizing: border-box; }
+
+
+
+
+
+
+
+/* ── ANIMATED GRID BACKGROUND ─────── */
+.grid-bg {
+  position: absolute;
+  inset: 0;
+  min-height: 100%;
+  background-image:
+    linear-gradient(rgba(61,220,110,0.03) 1px, transparent 1px),
+    linear-gradient(90deg, rgba(61,220,110,0.03) 1px, transparent 1px);
+  background-size: 48px 48px;
+  pointer-events: none;
+  z-index: 0;
+}
+
+.grid-bg::after {
+  content: '';
+  position: absolute;
+  inset: 0;
+  background: radial-gradient(ellipse 80% 60% at 50% 0%, rgba(61,220,110,0.06) 0%, transparent 70%);
+}
+
+/* ── NOISE TEXTURE ───────────────── */
+.ahr-page::after {
+  content: '';
+  position: absolute;
+  inset: 0;
+  min-height: 100%;
+  background-image: url("data:image/svg+xml,%3Csvg viewBox='0 0 256 256' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.9' numOctaves='4' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23n)' opacity='0.035'/%3E%3C/svg%3E");
+  pointer-events: none;
+  z-index: 1000;
+}
+
+/* ── WRAPPER ─────────────────────── */
+.ahr-page {
+  background: #0a0f0c;
+  color: #e8ede9;
+  font-family: 'Bricolage Grotesque', sans-serif;
+  font-weight: 400;
+  width: 100%;
+  display: block;
+  overflow-x: hidden;
+}
+.wrapper {
+  position: relative;
+  z-index: 1;
+  max-width: 680px;
+  margin: 0 auto;
+  padding: 0 32px 60px;
+}
+
+/* ── TOP BAR ─────────────────────── */
+.topbar {
+  padding: 20px 0;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  border-bottom: 1px solid #1e2b21;
+  animation: fadeDown 0.6s ease both;
+}
+
+.logo {
+  font-family: 'JetBrains Mono', monospace;
+  font-size: 13px;
+  font-weight: 500;
+  color: #3ddc6e;
+  letter-spacing: 0.5px;
+}
+.logo span { color: #6b7c6e; }
+
+.topbar-tag {
+  font-family: 'JetBrains Mono', monospace;
+  font-size: 11px;
+  letter-spacing: 2px;
+  text-transform: uppercase;
+  color: #0a0f0c;
+  background: #3ddc6e;
+  border: none;
+  padding: 7px 16px;
+  border-radius: 2px;
+  font-weight: 500;
+  box-shadow: 0 0 16px rgba(61,220,110,0.35);
+  animation: tagPulse 2.5s ease infinite;
+}
+
+@keyframes tagPulse {
+  0%, 100% { box-shadow: 0 0 16px rgba(61,220,110,0.35); }
+  50% { box-shadow: 0 0 28px rgba(61,220,110,0.6); }
+}
+
+/* ── HERO ────────────────────────── */
+.hero {
+  padding: 72px 0 56px;
+  animation: fadeUp 0.7s ease both 0.1s;
+}
+
+.kicker {
+  display: inline-flex;
+  align-items: center;
+  gap: 8px;
+  font-family: 'JetBrains Mono', monospace;
+  font-size: 10px;
+  letter-spacing: 2.5px;
+  text-transform: uppercase;
+  color: #3ddc6e;
+  margin-bottom: 28px;
+}
+.kicker-dot {
+  width: 6px; height: 6px;
+  background: #3ddc6e;
+  border-radius: 50%;
+  animation: pulse 2s ease infinite;
+}
+
+@keyframes pulse {
+  0%, 100% { opacity: 1; transform: scale(1); }
+  50% { opacity: 0.4; transform: scale(0.8); }
+}
+
+.wrapper h1 {
+  font-family: 'Clash Display', sans-serif;
+  font-size: clamp(36px, 7vw, 64px);
+  font-weight: 700;
+  line-height: 1.0;
+  color: #e8ede9;
+  margin-bottom: 10px;
+  letter-spacing: -1px;
+}
+
+.wrapper h1 .line2 {
+  color: #3ddc6e;
+  display: block;
+}
+
+.wrapper h1 .line3 {
+  color: #6b7c6e;
+  font-weight: 400;
+  display: block;
+  font-size: clamp(28px, 5vw, 48px);
+}
+
+.hero-sub {
+  font-size: 17px;
+  color: #6b7c6e;
+  line-height: 1.65;
+  margin-top: 24px;
+  max-width: 520px;
+  font-weight: 300;
+}
+
+.hero-sub strong {
+  color: #e8ede9;
+  font-weight: 500;
+}
+
+/* ── FREE PROMPT OFFER ───────────── */
+.offer-box {
+  margin: 40px 0;
+  background: rgba(61,220,110,0.12);
+  border: 1px solid rgba(61,220,110,0.2);
+  border-radius: 4px;
+  padding: 20px 24px;
+  display: flex;
+  align-items: center;
+  gap: 16px;
+  animation: fadeUp 0.7s ease both 0.2s;
+}
+
+.offer-icon {
+  font-size: 28px;
+  flex-shrink: 0;
+}
+
+.offer-text {}
+.offer-label {
+  font-family: 'JetBrains Mono', monospace;
+  font-size: 9px;
+  letter-spacing: 2px;
+  text-transform: uppercase;
+  color: #3ddc6e;
+  margin-bottom: 3px;
+}
+.offer-title {
+  font-size: 14px;
+  font-weight: 500;
+  color: #e8ede9;
+  line-height: 1.4;
+}
+.offer-title span { color: #3ddc6e; }
+
+/* ── EMAIL FORM ──────────────────── */
+.form-section {
+  animation: fadeUp 0.7s ease both 0.3s;
+}
+
+.form-label {
+  font-family: 'JetBrains Mono', monospace;
+  font-size: 10px;
+  letter-spacing: 2px;
+  text-transform: uppercase;
+  color: #6b7c6e;
+  margin-bottom: 12px;
+  display: block;
+}
+
+.form-row {
+  display: flex;
+  gap: 0;
+}
+
+.email-input {
+  flex: 1;
+  background: #131a15;
+  border: 1px solid #1e2b21;
+  border-right: none;
+  border-radius: 3px 0 0 3px;
+  padding: 14px 18px;
+  font-family: 'Bricolage Grotesque', sans-serif;
+  font-size: 15px;
+  color: #e8ede9;
+  outline: none;
+  transition: border-color 0.2s;
+}
+
+.email-input::placeholder { color: #6b7c6e; }
+.email-input:focus { border-color: #3ddc6e; }
+
+.submit-btn {
+  background: #3ddc6e;
+  color: #0a0f0c;
+  border: none;
+  border-radius: 0 3px 3px 0;
+  padding: 14px 24px;
+  font-family: 'Clash Display', sans-serif;
+  font-size: 14px;
+  font-weight: 600;
+  cursor: pointer;
+  white-space: nowrap;
+  transition: background 0.2s, transform 0.1s;
+  letter-spacing: 0.3px;
+}
+
+.submit-btn:hover { background: #4ded7e; }
+.submit-btn:active { transform: scale(0.98); }
+
+.form-note {
+  font-size: 11px;
+  color: #6b7c6e;
+  margin-top: 10px;
+  font-family: 'JetBrains Mono', monospace;
+}
+.form-note span { color: #3ddc6e; }
+
+/* ── SUCCESS STATE ───────────────── */
+.success-box {
+  display: none !important;
+  background: rgba(61,220,110,0.12);
+  border: 1px solid rgba(61,220,110,0.3);
+  border-radius: 4px;
+  padding: 20px 24px;
+  text-align: center;
+}
+.success-box.show { display: block !important; animation: fadeUp 0.4s ease both; }
+.success-icon { font-size: 32px; margin-bottom: 8px; }
+.success-title { font-family: 'Clash Display', sans-serif; font-size: 18px; font-weight: 600; color: #3ddc6e; margin-bottom: 4px; }
+.success-sub { font-size: 13px; color: #6b7c6e; }
+
+/* ── DIVIDER ─────────────────────── */
+.divider {
+  border: none;
+  border-top: 1px solid #1e2b21;
+  margin: 48px 0;
+}
+
+/* ── WHAT YOU'LL LEARN ───────────── */
+.section {
+  animation: fadeUp 0.7s ease both 0.4s;
+  margin-bottom: 48px;
+}
+
+.section-label {
+  font-family: 'JetBrains Mono', monospace;
+  font-size: 9px;
+  letter-spacing: 3px;
+  text-transform: uppercase;
+  color: #3ddc6e;
+  margin-bottom: 20px;
+  display: flex;
+  align-items: center;
+  gap: 12px;
+}
+.section-label::after {
+  content: '';
+  flex: 1;
+  height: 1px;
+  background: #1e2b21;
+}
+
+.learn-grid {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 2px;
+  background: #1e2b21;
+}
+
+.learn-item {
+  background: #131a15;
+  padding: 18px 20px;
+  display: flex;
+  gap: 12px;
+  align-items: flex-start;
+  transition: background 0.15s;
+}
+.learn-item:hover { background: #0f1612; }
+
+.learn-num {
+  font-family: 'JetBrains Mono', monospace;
+  font-size: 10px;
+  color: #3ddc6e;
+  flex-shrink: 0;
+  padding-top: 2px;
+  font-weight: 500;
+}
+
+.learn-text {
+  font-size: 13px;
+  color: #e8ede9;
+  line-height: 1.5;
+  opacity: 0.85;
+}
+
+/* ── WHO THIS IS FOR ─────────────── */
+.for-list {
+  list-style: none;
+  display: flex;
+  flex-direction: column;
+  gap: 2px;
+}
+
+.for-item {
+  background: #131a15;
+  border: 1px solid #1e2b21;
+  padding: 14px 18px;
+  display: flex;
+  align-items: center;
+  gap: 12px;
+  font-size: 14px;
+  color: #e8ede9;
+  opacity: 0.85;
+  transition: border-color 0.15s, opacity 0.15s;
+}
+.for-item:hover { border-color: #3ddc6e; opacity: 1; }
+.for-item::before {
+  content: '→';
+  color: #3ddc6e;
+  font-size: 12px;
+  flex-shrink: 0;
+}
+
+/* ── STATS ROW ───────────────────── */
+.stats-row {
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  gap: 2px;
+  background: #1e2b21;
+  margin: 48px 0;
+  animation: fadeUp 0.7s ease both 0.5s;
+}
+
+.stat {
+  background: #131a15;
+  padding: 24px 20px;
+  text-align: center;
+}
+.stat-num {
+  font-family: 'Clash Display', sans-serif;
+  font-size: 32px;
+  font-weight: 700;
+  color: #3ddc6e;
+  line-height: 1;
+  margin-bottom: 4px;
+}
+.stat-label {
+  font-family: 'JetBrains Mono', monospace;
+  font-size: 9px;
+  letter-spacing: 1.5px;
+  text-transform: uppercase;
+  color: #6b7c6e;
+  line-height: 1.4;
+}
+
+/* ── INSTRUCTOR ──────────────────── */
+.instructor {
+  background: #131a15;
+  border: 1px solid #1e2b21;
+  padding: 24px;
+  display: flex;
+  gap: 20px;
+  align-items: flex-start;
+  animation: fadeUp 0.7s ease both 0.5s;
+  margin-bottom: 48px;
+}
+
+.instructor-avatar {
+  width: 56px;
+  height: 56px;
+  background: rgba(61,220,110,0.12);
+  border: 1px solid rgba(61,220,110,0.2);
+  border-radius: 4px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-size: 24px;
+  flex-shrink: 0;
+}
+
+.instructor-name {
+  font-family: 'Clash Display', sans-serif;
+  font-size: 17px;
+  font-weight: 600;
+  color: #e8ede9;
+  margin-bottom: 3px;
+}
+.instructor-title {
+  font-size: 12px;
+  color: #3ddc6e;
+  font-family: 'JetBrains Mono', monospace;
+  margin-bottom: 8px;
+}
+.instructor-bio {
+  font-size: 13px;
+  color: #6b7c6e;
+  line-height: 1.6;
+}
+
+/* ── BOTTOM CTA ──────────────────── */
+.bottom-cta {
+  border-top: 1px solid #1e2b21;
+  padding: 48px 0 32px;
+  text-align: center;
+  animation: fadeUp 0.7s ease both 0.6s;
+}
+
+.bottom-cta h2 {
+  font-family: 'Clash Display', sans-serif;
+  font-size: 28px;
+  font-weight: 700;
+  color: #e8ede9;
+  margin-bottom: 8px;
+  letter-spacing: -0.5px;
+}
+.bottom-cta h2 span { color: #3ddc6e; }
+
+.bottom-cta p {
+  font-size: 14px;
+  color: #6b7c6e;
+  margin-bottom: 28px;
+}
+
+.bottom-form { max-width: 440px; margin: 0 auto; }
+
+/* ── FOOTER ──────────────────────── */
+footer {
+  border-top: 1px solid #1e2b21;
+  padding: 20px 0 32px;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  flex-wrap: wrap;
+  gap: 8px;
+}
+.footer-brand {
+  font-family: 'JetBrains Mono', monospace;
+  font-size: 11px;
+  color: #3ddc6e;
+}
+.footer-note {
+  font-family: 'JetBrains Mono', monospace;
+  font-size: 10px;
+  color: #6b7c6e;
+}
+
+/* ── COUNTER ─────────────────────── */
+.counter-box {
+  display: inline-flex;
+  align-items: center;
+  gap: 8px;
+  background: #131a15;
+  border: 1px solid #1e2b21;
+  border-radius: 2px;
+  padding: 6px 14px;
+  margin-top: 20px;
+  font-family: 'JetBrains Mono', monospace;
+  font-size: 11px;
+  color: #6b7c6e;
+}
+.counter-num {
+  color: #f0b429;
+  font-weight: 500;
+}
+.counter-dot {
+  width: 5px; height: 5px;
+  background: #f0b429;
+  border-radius: 50%;
+  animation: pulse 1.5s ease infinite;
+}
+
+/* ── ANIMATIONS ──────────────────── */
+@keyframes fadeUp {
+  from { opacity: 0; transform: translateY(18px); }
+  to   { opacity: 1; transform: translateY(0); }
+}
+@keyframes fadeDown {
+  from { opacity: 0; transform: translateY(-10px); }
+  to   { opacity: 1; transform: translateY(0); }
+}
+
+@media (max-width: 500px) {
+  .learn-grid { grid-template-columns: 1fr; }
+  .stats-row { grid-template-columns: 1fr; }
+  .form-row { flex-direction: column; }
+  .email-input { border-right: 1px solid #1e2b21; border-bottom: none; border-radius: 3px 3px 0 0; }
+  .submit-btn { border-radius: 0 0 3px 3px; width: 100%; padding: 14px; }
+  .instructor { flex-direction: column; }
+  footer { flex-direction: column; align-items: flex-start; }
+}
+</style>
+</head>
+<body>
+<div class="ahr-page">
+<div class="grid-bg"></div>
+<div class="wrapper">
+
+  <!-- TOP BAR -->
+  <nav class="topbar">
+    <div class="logo">aiforhr<span>.in</span></div>
+    <div class="topbar-tag">Launching Soon</div>
+  </nav>
+
+  <!-- HERO -->
+  <section class="hero">
+    <div class="kicker">
+      <span class="kicker-dot"></span>
+      India's First Practical AI Course for HR
+    </div>
+
+    <h1>
+      Stop fearing AI.
+      <span class="line2">Start using it.</span>
+      <span class="line3">Every. Single. Day.</span>
+    </h1>
+
+    <p class="hero-sub">
+      A short, practical course teaching <strong>HR & Recruitment professionals</strong> how to use ChatGPT, Claude, and AI tools in their real daily work — writing JDs, screening resumes, drafting policies, and more.<br><br>
+      <strong>Built for India. No tech background required.</strong>
+    </p>
+
+    <div class="counter-box">
+      <span class="counter-dot"></span>
+      <span><span class="counter-num" id="counter">247</span> HR professionals already on the waitlist</span>
+    </div>
+  </section>
+
+  <!-- FREE PROMPT OFFER -->
+  <div class="offer-box">
+    <div class="offer-icon">🎁</div>
+    <div class="offer-text">
+      <div class="offer-label">Free Gift on Signup</div>
+      <div class="offer-title">Get <span>10 AI Prompts for HR Professionals</span> — instantly delivered to your inbox. Use them in ChatGPT today.</div>
+    </div>
+  </div>
+
+  <!-- EMAIL FORM -->
+  <div class="form-section">
+    <label class="form-label">Join the waitlist — get early access + launch discount</label>
+    <div class="form-row" id="form-row">
+      <input type="email" class="email-input" id="email-input" placeholder="your.name@company.com" />
+      <button class="submit-btn" onclick="handleSubmit()">Get Early Access →</button>
+    </div>
+    <p class="form-note">✓ Free prompts delivered instantly &nbsp;·&nbsp; <span>Launch price: Rs. 499</span> (regular Rs. 999) &nbsp;·&nbsp; No spam, ever.</p>
+  </div>
+
+  <!-- SUCCESS BOX -->
+  <div class="success-box" id="success-box">
+    <div class="success-icon">✅</div>
+    <div class="success-title">You're on the list!</div>
+    <div class="success-sub">Check your inbox — your 10 free HR prompts are on the way.<br>You'll hear from us the moment the course goes live.</div>
+  </div>
+
+  <hr class="divider">
+
+  <!-- WHAT YOU'LL LEARN -->
+  <div class="section">
+    <div class="section-label">What you'll learn</div>
+    <div class="learn-grid">
+      <div class="learn-item">
+        <span class="learn-num">01</span>
+        <span class="learn-text">Write JDs & job posts 10x faster using AI prompts</span>
+      </div>
+      <div class="learn-item">
+        <span class="learn-num">02</span>
+        <span class="learn-text">Screen & shortlist resumes without reading every line</span>
+      </div>
+      <div class="learn-item">
+        <span class="learn-num">03</span>
+        <span class="learn-text">Draft HR policies, offer letters & SOPs in minutes</span>
+      </div>
+      <div class="learn-item">
+        <span class="learn-num">04</span>
+        <span class="learn-text">Build interview question banks for any role instantly</span>
+      </div>
+      <div class="learn-item">
+        <span class="learn-num">05</span>
+        <span class="learn-text">Analyse employee engagement data with AI assistance</span>
+      </div>
+      <div class="learn-item">
+        <span class="learn-num">06</span>
+        <span class="learn-text">Build a personal AI workflow you use every single day</span>
+      </div>
+    </div>
+  </div>
+
+  <!-- STATS -->
+  <div class="stats-row">
+    <div class="stat">
+      <div class="stat-num">90</div>
+      <div class="stat-label">Minutes<br>Total Duration</div>
+    </div>
+    <div class="stat">
+      <div class="stat-num">50+</div>
+      <div class="stat-label">AI Prompts<br>Included</div>
+    </div>
+    <div class="stat">
+      <div class="stat-num">₹999</div>
+      <div class="stat-label">Course Price<br>(Rs.499 Early Bird)</div>
+    </div>
+  </div>
+
+  <!-- WHO THIS IS FOR -->
+  <div class="section">
+    <div class="section-label">Who this is for</div>
+    <ul class="for-list">
+      <li class="for-item">HR Managers & HR Business Partners</li>
+      <li class="for-item">Talent Acquisition & Recruitment Professionals</li>
+      <li class="for-item">HR Generalists handling day-to-day operations</li>
+      <li class="for-item">L&D Professionals building training content</li>
+      <li class="for-item">HR Heads wanting to introduce AI to their team</li>
+      <li class="for-item">Anyone in HR who wants to stop fearing AI and start using it</li>
+    </ul>
+  </div>
+
+  <!-- INSTRUCTOR -->
+  <div class="instructor">
+    <div class="instructor-avatar">👨‍💼</div>
+    <div>
+      <div class="instructor-name">Coming from a Practitioner</div>
+      <div class="instructor-title">Built for India · Zero Jargon · Real Examples</div>
+      <div class="instructor-bio">
+        This course is built by someone who understands Indian workplaces — Naukri, Darwinbox, Keka, Indian labour law, and the way HR actually works in Indian companies. Not a theoretical course from a foreign university. Real, usable, tomorrow-morning kind of learning.
+      </div>
+    </div>
+  </div>
+
+  <!-- BOTTOM CTA -->
+  <div class="bottom-cta">
+    <h2>Ready to become the <span>AI-first HR</span><br>professional in your team?</h2>
+    <p>Join the waitlist. Get your free prompts. Be first in line when we launch.</p>
+    <div class="bottom-form">
+      <div class="form-row" id="form-row-2">
+        <input type="email" class="email-input" id="email-input-2" placeholder="your.name@company.com" />
+        <button class="submit-btn" onclick="handleSubmit2()">Join Waitlist →</button>
+      </div>
+    </div>
+  </div>
+
+  <!-- FOOTER -->
+  <footer>
+    <div class="footer-brand">aiforhr.in</div>
+    <div class="footer-note">India · HR × Artificial Intelligence · 2025</div>
+  </footer>
+
+</div>
+</div>
+<script>
+  // Counter animation
+  (function() {
+    var el = document.getElementById('counter');
+    if (!el) return;
+    var count = 231, target = 247;
+    setTimeout(function() {
+      var iv = setInterval(function() {
+        count++; el.textContent = count;
+        if (count >= target) clearInterval(iv);
+      }, 80);
+    }, 800);
+  })();
+
+  // Form reset on load
+  function resetForms() {
+    var sb = document.getElementById('success-box');
+    var fr = document.getElementById('form-row');
+    var e1 = document.getElementById('email-input');
+    var e2 = document.getElementById('email-input-2');
+    if (sb) { sb.style.display = 'none'; sb.classList.remove('show'); }
+    if (fr) fr.style.display = 'flex';
+    if (e1) e1.value = '';
+    if (e2) e2.value = '';
+  }
+  window.addEventListener('DOMContentLoaded', resetForms);
+  window.addEventListener('load', resetForms);
+  setTimeout(resetForms, 200);
+
+  // ── BREVO CONFIG ──
+  var BREVO_KEY  = '';  // paste: 'xkeysib-abc...'
+  var BREVO_LIST = 0;   // paste: 3
+  // ─────────────────
+
+  function showSuccess(n) {
+    if (n === 1) {
+      var fr = document.getElementById('form-row');
+      var sb = document.getElementById('success-box');
+      if (fr) fr.style.display = 'none';
+      if (sb) { sb.style.cssText = 'display:block !important'; sb.classList.add('show'); }
+    } else {
+      var r2 = document.getElementById('form-row-2');
+      if (r2) r2.innerHTML = '<div style="text-align:center;padding:14px;color:#3ddc6e;font-family:monospace;font-size:13px;">&#10003; You are on the list! Check your inbox for free prompts.</div>';
+    }
+    var c = document.getElementById('counter');
+    if (c) c.textContent = parseInt(c.textContent) + 1;
+  }
+
+  function submitForm(n) {
+    var id  = n === 1 ? 'email-input' : 'email-input-2';
+    var sel = n === 1 ? '#form-row .submit-btn' : '#form-row-2 .submit-btn';
+    var inp = document.getElementById(id);
+    var btn = document.querySelector(sel);
+    var em  = inp ? inp.value.trim() : '';
+
+    if (!em || em.indexOf('@') < 0) {
+      if (inp) { inp.style.borderColor = '#f05a28'; setTimeout(function(){ inp.style.borderColor=''; }, 2000); inp.focus(); }
+      return;
+    }
+    if (btn) { btn.textContent = 'Adding...'; btn.disabled = true; }
+
+    if (!BREVO_KEY || !BREVO_LIST) { showSuccess(n); return; }
+
+    var xhr = new XMLHttpRequest();
+    xhr.open('POST', 'https://api.brevo.com/v3/contacts', true);
+    xhr.setRequestHeader('Content-Type', 'application/json');
+    xhr.setRequestHeader('api-key', BREVO_KEY);
+    xhr.onreadystatechange = function() { if (xhr.readyState === 4) showSuccess(n); };
+    xhr.onerror = function() { showSuccess(n); };
+    xhr.send(JSON.stringify({ email: em, listIds: [BREVO_LIST], updateEnabled: true }));
+  }
+
+  window.handleSubmit  = function() { submitForm(1); };
+  window.handleSubmit2 = function() { submitForm(2); };
+
+  (function(){
+    var e1 = document.getElementById('email-input');
+    var e2 = document.getElementById('email-input-2');
+    if (e1) e1.addEventListener('keydown', function(e){ if(e.key==='Enter') submitForm(1); });
+    if (e2) e2.addEventListener('keydown', function(e){ if(e.key==='Enter') submitForm(2); });
+  })();
+</script>
+
+</body>
+</html>
